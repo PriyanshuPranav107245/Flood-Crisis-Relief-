@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Flood Crisis Relief</title>
+    <link rel="stylesheet" href="admin-styles.css">
+</head>
+<body>
+    <!-- Navigation Sidebar -->
+    <div class="admin-sidebar">
+        <div class="sidebar-header">
+            <h2>🌊 Relief Admin</h2>
+            <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="#dashboard" class="nav-item active" onclick="switchTab('dashboard')">
+                <span class="icon">📊</span>
+                <span>Dashboard</span>
+            </a>
+            <a href="#donations" class="nav-item" onclick="switchTab('donations')">
+                <span class="icon">💰</span>
+                <span>Donations</span>
+            </a>
+            <a href="#donors" class="nav-item" onclick="switchTab('donors')">
+                <span class="icon">👥</span>
+                <span>Donors</span>
+            </a>
+            <a href="#confirmations" class="nav-item" onclick="switchTab('confirmations')">
+                <span class="icon">✓</span>
+                <span>Payment Confirmations</span>
+            </a>
+            <a href="#reports" class="nav-item" onclick="switchTab('reports')">
+                <span class="icon">📈</span>
+                <span>Reports</span>
+            </a>
+            <a href="#campaigns" class="nav-item" onclick="switchTab('campaigns')">
+                <span class="icon">🎯</span>
+                <span>Campaigns</span>
+            </a>
+            <a href="#content" class="nav-item" onclick="switchTab('content')">
+                <span class="icon">📝</span>
+                <span>Content</span>
+            </a>
+            <a href="#settings" class="nav-item" onclick="switchTab('settings')">
+                <span class="icon">⚙️</span>
+                <span>Settings</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="admin-main">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="header-content">
+                <h1 id="pageTitle">Dashboard</h1>
+                <div class="header-user">
+                    <span id="adminName">Admin</span>
+                    <button class="user-menu-btn" onclick="toggleUserMenu()">▼</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content Area -->
+        <div class="admin-content">
+            <!-- Dashboard Tab -->
+            <div id="dashboard-tab" class="tab-content active">
+                <div class="dashboard-grid">
+                    <div class="stat-box">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-info">
+                            <h3>Total Donations</h3>
+                            <p class="stat-value" id="totalDonations">$0</p>
+                            <span class="stat-label">This month</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-box">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-info">
+                            <h3>Total Donors</h3>
+                            <p class="stat-value" id="totalDonors">0</p>
+                            <span class="stat-label">Registered donors</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-box">
+                        <div class="stat-icon">✓</div>
+                        <div class="stat-info">
+                            <h3>Pending Confirmations</h3>
+                            <p class="stat-value" id="pendingConfirmations">0</p>
+                            <span class="stat-label">Awaiting verification</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-box">
+                        <div class="stat-icon">📈</div>
+                        <div class="stat-info">
+                            <h3>Success Rate</h3>
+                            <p class="stat-value" id="successRate">0%</p>
+                            <span class="stat-label">Confirmed donations</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-charts">
+                    <div class="chart-container">
+                        <h3>Recent Donations</h3>
+                        <div id="recentDonationsChart" class="chart"></div>
+                    </div>
+
+                    <div class="chart-container">
+                        <h3>Payment Method Distribution</h3>
+                        <div class="payment-methods">
+                            <div class="method-bar">
+                                <span>Card Payments</span>
+                                <div class="progress-bar">
+                                    <div class="progress" id="cardProgress" style="width: 0%"></div>
+                                </div>
+                                <span id="cardCount">0</span>
+                            </div>
+                            <div class="method-bar">
+                                <span>UPI Payments</span>
+                                <div class="progress-bar">
+                                    <div class="progress upi" id="upiProgress" style="width: 0%"></div>
+                                </div>
+                                <span id="upiCount">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Donations Tab -->
+            <div id="donations-tab" class="tab-content">
+                <div class="tab-header">
+                    <h2>Donation Records</h2>
+                    <div class="tab-actions">
+                        <button class="btn-secondary" onclick="addDonation()">➕ Add Donation</button>
+                        <button class="btn-primary" onclick="exportDonations()">📥 Export CSV</button>
+                    </div>
+                </div>
+
+                <div class="filter-bar">
+                    <input type="text" id="donationSearch" placeholder="Search by donor name or email..." class="search-input">
+                    <select id="donationFilter" class="filter-select">
+                        <option value="">All Donations</option>
+                        <option value="card">Card Payments</option>
+                        <option value="upi">UPI Payments</option>
+                    </select>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Donor Name</th>
+                                <th>Email</th>
+                                <th>Amount</th>
+                                <th>Method</th>
+                                <th>Privacy</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="donationsTable">
+                            <tr>
+                                <td colspan="7" class="text-center">Loading donations...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Donors Tab -->
+            <div id="donors-tab" class="tab-content">
+                <div class="tab-header">
+                    <h2>Donor List</h2>
+                    <button class="btn-primary" onclick="exportDonors()">📥 Export CSV</button>
+                </div>
+
+                <div class="filter-bar">
+                    <input type="text" id="donorSearch" placeholder="Search donors..." class="search-input">
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Total Donated</th>
+                                <th>Donation Count</th>
+                                <th>Join Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="donorsTable">
+                            <tr>
+                                <td colspan="7" class="text-center">Loading donors...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Payment Confirmations Tab -->
+            <div id="confirmations-tab" class="tab-content">
+                <div class="tab-header">
+                    <h2>Payment Confirmations (UPI)</h2>
+                    <span class="status-badge pending" id="confirmationCount">0 Pending</span>
+                </div>
+
+                <div class="filter-bar">
+                    <select id="confirmationFilter" class="filter-select">
+                        <option value="pending">Pending</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="rejected">Rejected</option>
+                        <option value="">All</option>
+                    </select>
+                </div>
+
+                <div class="confirmations-grid">
+                    <div id="confirmationsContainer" class="confirmations-list">
+                        Loading confirmations...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports Tab -->
+            <div id="reports-tab" class="tab-content">
+                <div class="tab-header">
+                    <h2>Reports & Analytics</h2>
+                </div>
+
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <h3>Monthly Summary</h3>
+                        <div class="report-content">
+                            <p>Total Donations: <strong id="monthTotal">$0</strong></p>
+                            <p>Donor Count: <strong id="monthDonors">0</strong></p>
+                            <p>Average Donation: <strong id="monthAverage">$0</strong></p>
+                        </div>
+                        <button class="btn-secondary" onclick="generateMonthlyReport()">Generate Report</button>
+                    </div>
+
+                    <div class="report-card">
+                        <h3>Yearly Summary</h3>
+                        <div class="report-content">
+                            <p>Total Donations: <strong id="yearTotal">$0</strong></p>
+                            <p>Donor Count: <strong id="yearDonors">0</strong></p>
+                            <p>Average Donation: <strong id="yearAverage">$0</strong></p>
+                        </div>
+                        <button class="btn-secondary" onclick="generateYearlyReport()">Generate Report</button>
+                    </div>
+
+                    <div class="report-card">
+                        <h3>Impact Report</h3>
+                        <div class="report-content">
+                            <p>Families Helped: <strong id="familiesHelped">0</strong></p>
+                            <p>Relief Items Distributed: <strong id="itemsDistributed">0</strong></p>
+                            <p>People Reached: <strong id="peopleReached">0</strong></p>
+                        </div>
+                        <button class="btn-secondary" onclick="generateImpactReport()">Generate Report</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Campaigns Tab -->
+            <div id="campaigns-tab" class="tab-content">
+                <div class="tab-header">
+                    <h2>Relief Campaigns</h2>
+                    <button class="btn-primary" onclick="openCampaignModal()">+ New Campaign</button>
+                </div>
+
+                <div class="campaigns-grid" id="campaignsGrid">
+                    Loading campaigns...
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div id="settings-tab" class="tab-content">
+                <div class="tab-header">
+                    <h2>Settings</h2>
+                </div>
+
+                <div class="settings-container">
+                    <!-- Donation Related Settings -->
+                    <div class="settings-section-card">
+                        <h3>💰 Donation Related Settings</h3>
+                        
+                        <div class="settings-section">
+                            <h4>Donation Goal</h4>
+                            <div class="form-group">
+                                <label>Goal Amount ($)</label>
+                                <input type="number" id="goalAmount" class="form-input" value="500000" min="1" step="1000">
+                                <small>The target amount to be raised for this crisis relief effort</small>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <h4>Payment Settings</h4>
+                            <div class="form-group">
+                                <label>Receiver UPI ID</label>
+                                <input type="text" id="receiverUPI" class="form-input" value="priyanshupranav8@okaxis">
+                                <small>This ID is used in QR code for UPI payments</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Bank Account Name</label>
+                                <input type="text" id="bankAccountName" class="form-input" placeholder="Account holder name">
+                                <small>Name on the bank account for direct transfers</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Bank Account Number</label>
+                                <input type="text" id="bankAccountNumber" class="form-input" placeholder="Account number">
+                                <small>Bank account number for direct transfers</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Bank Name</label>
+                                <input type="text" id="bankName" class="form-input" placeholder="Bank name">
+                                <small>Name of the bank</small>
+                            </div>
+                            <div class="form-group">
+                                <label>IFSC Code</label>
+                                <input type="text" id="bankIFSC" class="form-input" placeholder="IFSC code">
+                                <small>Indian Financial System Code for bank transfers</small>
+                            </div>
+                            <div class="form-group">
+                                <label>SWIFT Code (Optional)</label>
+                                <input type="text" id="bankSWIFT" class="form-input" placeholder="SWIFT/BIC code">
+                                <small>International bank code for international transfers</small>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <h4>Crisis Information</h4>
+                            <div class="form-group">
+                                <label>Crisis Overview Text</label>
+                                <textarea id="crisisOverview" class="form-input" rows="4" placeholder="Describe the current crisis situation...">Communities across the region are facing unprecedented flooding. Thousands of families have lost their homes, livelihoods, and access to clean water and food. Your donation can provide emergency relief and help rebuild.</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Families Affected</label>
+                                <input type="text" id="familiesAffected" class="form-input" value="5,000+">
+                            </div>
+                            <div class="form-group">
+                                <label>Aid Distributed</label>
+                                <input type="text" id="aidDistributed" class="form-input" value="$2.5M">
+                            </div>
+                        </div>
+
+                        <button class="btn-primary" onclick="saveDonationSettings()">Save Donation Settings</button>
+                    </div>
+
+                    <!-- General Site Settings -->
+                    <div class="settings-section-card">
+                        <h3>⚙️ General Site Settings</h3>
+                        
+                        <div class="settings-section">
+                            <h4>Organization Information</h4>
+                            <div class="form-group">
+                                <label>Organization Name</label>
+                                <input type="text" id="orgName" class="form-input" value="Flood Crisis Relief">
+                            </div>
+                            <div class="form-group">
+                                <label>Website Title</label>
+                                <input type="text" id="siteTitle" class="form-input" value="Flood Crisis Relief - Donate Now">
+                                <small>The title that appears in browser tabs</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Tagline</label>
+                                <input type="text" id="siteTagline" class="form-input" value="Help us rebuild communities affected by devastating floods">
+                                <small>The subtitle displayed under the logo</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Contact Email</label>
+                                <input type="email" id="contactEmail" class="form-input" value="donate@floodrelief.org">
+                            </div>
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="tel" id="contactPhone" class="form-input" value="+1-800-RELIEF-1">
+                            </div>
+                            <div class="form-group">
+                                <label>Address</label>
+                                <textarea id="orgAddress" class="form-input" rows="3" placeholder="Organization address"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <h4>Social Media & Links</h4>
+                            <div class="form-group">
+                                <label>Facebook URL</label>
+                                <input type="url" id="facebookUrl" class="form-input" placeholder="https://facebook.com/...">
+                            </div>
+                            <div class="form-group">
+                                <label>Twitter URL</label>
+                                <input type="url" id="twitterUrl" class="form-input" placeholder="https://twitter.com/...">
+                            </div>
+                            <div class="form-group">
+                                <label>Instagram URL</label>
+                                <input type="url" id="instagramUrl" class="form-input" placeholder="https://instagram.com/...">
+                            </div>
+                            <div class="form-group">
+                                <label>LinkedIn URL</label>
+                                <input type="url" id="linkedinUrl" class="form-input" placeholder="https://linkedin.com/...">
+                            </div>
+                            <div class="form-group">
+                                <label>Privacy Policy URL</label>
+                                <input type="url" id="privacyPolicyUrl" class="form-input" placeholder="https://...">
+                            </div>
+                            <div class="form-group">
+                                <label>Terms of Service URL</label>
+                                <input type="url" id="termsUrl" class="form-input" placeholder="https://...">
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <h4>Donation Settings</h4>
+                            <div class="form-group">
+                                <label>Currency</label>
+                                <select id="currency" class="form-input">
+                                    <option value="USD">USD ($)</option>
+                                    <option value="INR">INR (₹)</option>
+                                    <option value="EUR">EUR (€)</option>
+                                    <option value="GBP">GBP (£)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Minimum Donation Amount</label>
+                                <input type="number" id="minDonation" class="form-input" value="10" min="1">
+                            </div>
+                            <div class="form-group">
+                                <label>Maximum Donation Amount</label>
+                                <input type="number" id="maxDonation" class="form-input" value="10000" min="1">
+                            </div>
+                            <div class="form-group">
+                                <label>Tax Deduction Info</label>
+                                <textarea id="taxInfo" class="form-input" rows="3" placeholder="Information about tax deductions for donations"></textarea>
+                                <small>Information displayed to donors about tax benefits</small>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <h4>System Settings</h4>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="maintenanceMode">
+                                    Enable Maintenance Mode
+                                </label>
+                                <small>When enabled, the donation site will show a maintenance message</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Maintenance Message</label>
+                                <textarea id="maintenanceMessage" class="form-input" rows="3" placeholder="Site is under maintenance. Please check back later."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Google Analytics ID</label>
+                                <input type="text" id="analyticsId" class="form-input" placeholder="GA-XXXXXXXXXX">
+                                <small>Google Analytics tracking ID for website analytics</small>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <h4>Admin Account</h4>
+                            <div class="form-group">
+                                <label>Current Password</label>
+                                <input type="password" id="currentPassword" class="form-input" placeholder="Enter current password">
+                            </div>
+                            <div class="form-group">
+                                <label>New Password</label>
+                                <input type="password" id="newPassword" class="form-input" placeholder="Enter new password">
+                            </div>
+                            <div class="form-group">
+                                <label>Confirm New Password</label>
+                                <input type="password" id="confirmPassword" class="form-input" placeholder="Confirm new password">
+                            </div>
+                        </div>
+
+                        <button class="btn-primary" onclick="saveGeneralSettings()">Save General Settings</button>
+                        <button class="btn-secondary" onclick="changePassword()">Change Password</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Management Tab -->
+            <div id="content-tab" class="tab-content">
+                <div class="tab-header">
+                    <h2>Content Management</h2>
+                </div>
+
+                <div class="content-management">
+                    <div class="settings-section">
+                        <h3>FAQ Items</h3>
+                        <div id="faqEditor">
+                            <!-- FAQ items will be loaded here -->
+                        </div>
+                        <button class="btn-secondary" onclick="addFaqItem()">Add FAQ Item</button>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>Impact Items</h3>
+                        <div id="impactEditor">
+                            <!-- Impact items will be loaded here -->
+                        </div>
+                        <button class="btn-secondary" onclick="addImpactItem()">Add Impact Item</button>
+                    </div>
+
+                    <button class="btn-primary" onclick="saveContent()">Save Content Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Campaign Modal -->
+    <div id="campaignModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeCampaignModal()">&times;</span>
+            <h2>Create New Campaign</h2>
+            <form id="campaignForm" class="modal-form">
+                <div class="form-group">
+                    <label>Campaign Name</label>
+                    <input type="text" id="campaignName" required>
+                </div>
+                <div class="form-group">
+                    <label>Goal Amount</label>
+                    <input type="number" id="campaignGoal" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="campaignDescription" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Create Campaign</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin-dashboard.js"></script>
+</body>
+</html>
