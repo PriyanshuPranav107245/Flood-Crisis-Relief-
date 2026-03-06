@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flood Crisis Relief - Donate Now</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo">🌊 Flood Crisis Relief</h1>
+                <p class="tagline">Help us rebuild communities affected by devastating floods</p>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.pexels.com/photos/28447770/pexels-photo-28447770.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Flooded urban street with submerged cars" class="hero-img">
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Crisis Information Section -->
+        <section class="info-section">
+            <div class="info-content">
+                <h2>Crisis Overview</h2>
+                <p>Communities across the region are facing unprecedented flooding. Thousands of families have lost their homes, livelihoods, and access to clean water and food. Your donation can provide emergency relief and help rebuild.</p>
+                
+                <div class="crisis-gallery">
+                    <div class="gallery-item">
+                        <img src="https://images.pexels.com/photos/19063417/pexels-photo-19063417.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1" alt="Flooded village in Cambodia" class="gallery-img">
+                        <p class="gallery-caption">Flooded communities in rural areas</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.pexels.com/photos/14823612/pexels-photo-14823612.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1" alt="Aerial view of flooded village" class="gallery-img">
+                        <p class="gallery-caption">Aerial view of affected villages</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.pexels.com/photos/6471927/pexels-photo-6471927.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1" alt="Flooded town with submerged buildings" class="gallery-img">
+                        <p class="gallery-caption">Urban areas impacted by flooding</p>
+                    </div>
+                </div>
+                
+                <div class="impact-stats">
+                    <div class="stat-card">
+                        <h3>5,000+</h3>
+                        <p>Families Affected</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>$2.5M</h3>
+                        <p>Aid Distributed</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>24/7</h3>
+                        <p>Emergency Support</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Donation Section -->
+        <section class="donation-section">
+            <h2>Make a Donation</h2>
+            <p class="section-subtitle">Every donation helps. Choose your donation amount or enter a custom amount.</p>
+            
+            <form id="donationForm" class="donation-form">
+                <!-- Quick Amount Selection -->
+                <div class="amount-buttons">                    
+                    <button type="button" class="amount-btn" data-amount="25">$25</button>
+                    <button type="button" class="amount-btn" data-amount="50">$50</button>
+                    <button type="button" class="amount-btn" data-amount="100">$100</button>
+                    <button type="button" class="amount-btn" data-amount="250">$250</button>
+                    <button type="button" class="amount-btn" data-amount="500">$500</button>
+                </div>
+
+                <!-- Custom Amount -->
+                <div class="form-group">
+                    <label for="customAmount">Custom Amount </label>
+                    <input type="number" id="customAmount" name="customAmount" placeholder="Enter amount" min="1" step="0.01">
+                </div>
+
+                <!-- Donation Type -->
+                <div class="form-group">
+                    <label>Donation Type</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="donationType" value="one-time" checked>
+                            One-Time Donation
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="donationType" value="monthly">
+                            Monthly Donation
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Donor Information -->
+                <fieldset class="donor-info">
+                    <legend>Your Information</legend>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number (Optional)</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Address (Optional)</label>
+                        <input type="text" id="address" name="address" placeholder="Street address">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" id="city" name="city">
+                        </div>
+                        <div class="form-group">
+                            <label for="state">State/Province</label>
+                            <input type="text" id="state" name="state">
+                        </div>
+                        <div class="form-group">
+                            <label for="zip">ZIP/Postal Code</label>
+                            <input type="text" id="zip" name="zip">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Payment Method Selection -->
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="paymentMethod" value="card" checked>
+                            Credit/Debit Card
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="paymentMethod" value="upi">
+                            UPI
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Payment Information - Card -->
+                <fieldset class="payment-info" id="cardPaymentSection">
+                    <legend>Card Payment Information</legend>
+                    
+                    <div class="form-group">
+                        <label for="cardName">Cardholder Name</label>
+                        <input type="text" id="cardName" name="cardName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cardNumber">Card Number</label>
+                        <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expiry">Expiry Date</label>
+                            <input type="text" id="expiry" name="expiry" placeholder="MM/YY" maxlength="5" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="4" required>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Payment Information - UPI -->
+                <div class="upi-payment" id="upiPaymentSection" style="display: none;">
+                    <div class="upi-info-box">
+                        <h4>Send Payment via UPI</h4>
+                        
+                        <!-- QR Code Option -->
+                        <div class="qr-code-section">
+                            <p class="qr-instruction">Scan this QR code with your UPI app to send payment:</p>
+                            <div class="qr-code-container">
+                                <img src="upiidqr1.svg" alt="UPI QR Code" class="qr-code-image">
+                            </div>
+                            <p class="qr-note">Open any UPI app (Google Pay, PhonePe, Paytm, etc.) and scan the QR code to complete your donation instantly.</p>
+                        </div>
+
+                        <!-- Manual Entry Option -->
+                        <div class="manual-entry-divider">
+                            <span>OR</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="upiId">Your UPI ID (Optional)</label>
+                            <input type="text" id="upiId" name="upiId" placeholder="example@upi">
+                            <small class="upi-hint">Format: username@bankname (e.g., priya@okaxis) - Only if paying manually</small>
+                        </div>
+                        <p class="upi-note">After submission, you will receive payment instructions on your registered email. Please complete the payment and send the confirmation screenshot to donate@floodrelief.org for your tax receipt.</p>
+                    </div>
+                </div>
+
+                <!-- Checkbox -->
+                <label class="checkbox-label">
+                    <input type="checkbox" name="newsletter" checked>
+                    Send me updates about the relief efforts
+                </label>
+
+                <!-- Error Message -->
+                <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn">Donate Now</button>
+            </form>
+
+            <!-- Success Message -->
+            <div id="successMessage" class="success-message" style="display: none;">
+                <h3>Thank You!</h3>
+                <p>Your donation of <span id="donationAmount">$0</span> has been received. A confirmation email will be sent to you shortly.</p>
+                <button type="button" class="btn-secondary" onclick="location.reload()">Make Another Donation</button>
+            </div>
+        </section>
+
+        <!-- Donation Counter Section -->
+        <section class="donation-counter-section">
+            <h2>Help Us Reach Our Goal</h2>
+            <div class="counter-container">
+                <div class="goal-stats">
+                    <div class="stat-box">
+                        <div class="stat-label">Goal Amount</div>
+                        <div class="stat-value" id="goalAmount">$500,000</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Total Raised</div>
+                        <div class="stat-value" id="raisedAmount">$0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Number of Donors</div>
+                        <div class="stat-value" id="donorCount">0</div>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                    </div>
+                    <p class="progress-text"><span id="percentRaised">0</span>% of goal reached</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Donor List Section -->
+        <section class="donor-list-section">
+            <h2>Our Generous Donors</h2>
+            <p class="section-subtitle">Thank you to everyone who has contributed to this relief effort</p>
+            
+            <div class="donor-container">
+                <ul class="donor-list" id="donorList">
+                    <li class="donor-item">No donations yet. Be the first to donate!</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <h3 class="faq-question">Where does my donation go?</h3>
+                    <p class="faq-answer">100% of your donation goes directly to emergency relief efforts including food, clean water, shelter, and medical supplies for affected families. We maintain complete transparency about fund allocation and provide detailed reports to all donors.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Is my donation tax-deductible?</h3>
+                    <p class="faq-answer">Yes! We are a registered 501(c)(3) nonprofit organization. You will receive a tax receipt for your donation via email within 24 hours, which you can use for tax deduction purposes.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Can I donate anonymously?</h3>
+                    <p class="faq-answer">Yes, you can choose to make an anonymous donation during the checkout process. Just leave the donor information fields blank and provide only an email for tax receipts.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">What if I want to donate supplies instead of money?</h3>
+                    <p class="faq-answer">We welcome in-kind donations! Contact us at donate@floodrelief.org or call 1-800-RELIEF-1 for information about donating supplies like blankets, food, water, and medical kits. We'll coordinate collection and delivery.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">What payment methods do you accept?</h3>
+                    <p class="faq-answer">We accept all major credit and debit cards (Visa, Mastercard, American Express, and Discover). You can also donate via bank transfer, PayPal, and cryptocurrency. Email donate@floodrelief.org for alternative payment methods.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">How long will the relief efforts continue?</h3>
+                    <p class="faq-answer">We operate in phases: emergency response (0-3 months), stabilization (3-12 months), and reconstruction (1-3 years). Long-term donations help us support communities through all stages of recovery.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">How can I cancel my monthly donation?</h3>
+                    <p class="faq-answer">You can cancel your monthly donation at any time by contacting us at donate@floodrelief.org or calling 1-800-RELIEF-1. You can also manage your subscription through your account dashboard on our website.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Can I receive updates on how my donation was used?</h3>
+                    <p class="faq-answer">Absolutely! Check the "Send me updates about the relief efforts" option during donation to receive monthly impact reports showing exactly how your donation helped affected families.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Does your organization have any certifications or credentials?</h3>
+                    <p class="faq-answer">Yes, we are registered with the IRS as a 501(c)(3) nonprofit and hold certifications from Charity Navigator, GiveWell, and the Better Business Bureau's Wise Giving Alliance. You can verify our status on Guidestar.org.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Can my employer match my donation?</h3>
+                    <p class="faq-answer">Many employers offer donation matching programs. We work with most major companies. Check with your HR department and mention our nonprofit ID (EIN: 12-3456789) to set up matching.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">How can I get involved as a volunteer?</h3>
+                    <p class="faq-answer">We need volunteers for disaster relief, reconstruction, and administrative support. Please visit our website or email volunteer@floodrelief.org to learn about current opportunities in your area.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Can I donate in a different currency?</h3>
+                    <p class="faq-answer">Our online system processes USD, but we accept CAN, EUR, GBP, and other major currencies. Your bank will handle the conversion. Contact donate@floodrelief.org for wire transfer options in other currencies.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Is there a minimum or maximum donation amount?</h3>
+                    <p class="faq-answer">There is no minimum donation amount—every dollar helps! For donations over $10,000, please contact our major donors team at majordonors@floodrelief.org for specialized support and recognition options.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">When will aid reach affected communities?</h3>
+                    <p class="faq-answer">We distribute emergency aid within 48-72 hours of receiving donations to critical needs areas. Local partnerships ensure fast, efficient delivery to families who need help most urgently.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">How is your organization funded?</h3>
+                    <p class="faq-answer">We operate entirely on donations from individuals, corporations, and foundations. We maintain an operating reserve of 3 months of expenses to ensure continuity of aid during crises.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Section -->
+        <section class="impact-section">
+            <div class="impact-content">
+                <div class="impact-text">
+                    <h2>Your Impact</h2>
+                    <p class="impact-intro">Every dollar you donate makes a real difference in the lives of those affected by flooding. See how your contribution helps:</p>
+                </div>
+                <div class="impact-image">
+                    <img src="https://images.pexels.com/photos/28447774/pexels-photo-28447774.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1" alt="Flooded suburban house" class="impact-img">
+                </div>
+            </div>
+            
+            <div class="impact-list">
+                <div class="impact-item">
+                    <span class="impact-amount">$10</span>
+                    <p>Provides a family with safe drinking water for a week</p>
+                </div>
+                <div class="impact-item">
+                    <span class="impact-amount">$25</span>
+                    <p>Supplies emergency first-aid kits for 5 families</p>
+                </div>
+                <div class="impact-item">
+                    <span class="impact-amount">$50</span>
+                    <p>Provides shelter materials for one family</p>
+                </div>
+                <div class="impact-item">
+                    <span class="impact-amount">$100</span>
+                    <p>Funds a week of meals for 8 people</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Flood Crisis Relief. All rights reserved.</p>
+            <p>Contact: donate@floodrelief.org | Phone: 1-800-RELIEF-1</p>
+            <p><a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a> | <a href="admin-login.html" style="color: rgba(255,255,255,0.5); font-size: 0.8em;">Admin</a></p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
